@@ -1,11 +1,5 @@
-def minimin_rem(arr):
-    l = sorted(set(arr))
-    if len(l) == 0:
-        return 0
-    return l[-2]
-
-
-    
-n = int(input())
-arr = [int(s) for s in input().split()]
-print(minimin_rem(arr))
+tt = int(input())
+for _ in range(tt):
+	l = [int(s) for s in input().split()]
+	l.sort()
+	print((l[0] * (l[1]-1) * (l[2]-2))%1000000007)
