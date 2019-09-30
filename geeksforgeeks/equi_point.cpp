@@ -1,40 +1,35 @@
-#include<bits/stdc++.h>
-#define ll long long int
-
+#include <bits/stdc++.h>
 using namespace std;
+#define ll long long int
+#define mod 1000000007
+#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define el "\n"
 
-int eq(int a[], int n){
-    
-    if(n == 1){
-        return 1;
-    }
-    int ts = 0;
-    for(int i = 0; i < n; i++){
-        ts += a[i];
-    }
-    
-    int cs = 0;
-    bool f = false;
-    for(int i = 0; i < n-2; i++){
-        cs += a[i];
-        if(cs == (ts - cs - a[i+1])){
-            f = true;
-            return i+2;
+int equi(int a[], int n){
+    int sum = 0;
+    if(n == 1) return 1;
+    for(int i = 0; i < n; i++) sum += a[i];
+    int csum = 0;
+    bool found = 0;
+    for(int i = 1; i < n-1; i++){
+        csum += a[i-1];
+        if((sum - csum - a[i]) == csum){
+            found = 1;
+            return i+1;
         }
     }
-    if(!f) return -1;
+    if(!found) return -1;
     
 }
+
 int main(){
-    
-    int t; cin>>t;
-    while(t--){
-        int n; cin>>n;
+    int tc;
+    cin>>tc;
+    while(tc--){
+        int n;
+        cin>>n;
         int a[n];
         for(int i = 0; i < n; i++) cin>>a[i];
-        cout<<eq(a, n)<<endl;
-        
+        cout << equi(a, n) << el;
     }
-	
-	return 0;
 }

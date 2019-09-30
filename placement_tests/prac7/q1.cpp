@@ -7,17 +7,14 @@ using namespace std;
 #define el "\n"
 
 int fun(db x1, db x2, db y1, db y2){
-    if(x2 == x1) return max(0, (int) (abs(y2-y1)-1));
-    if(y1 == y2) return max(0, (int) (abs(x2-x1)-1));
-    int ans = 0;
-    db slope = (db) (y2-y1)/(x2-x1);
-    //cout << slope << el;
-    for(int x = min(x1, x2)+1; x < max(x1, x2); x++){
-        db y = (slope) * (x-x1) + y1;
-        //cout << x << " " << y << el;
-        if(floor(y) == y) ans++;
-    }
-    return ans;
+    if(x2 == x1) return max(0, (int) abs(y2-y1)-1);
+    if(y1 == y2) return max(0, (int) abs(x2-x1)-1);
+    db slope = (y2-y1)/(x2-x1);
+    
+    int ans = (int) abs(slope * (x2-x1))-1;
+    return max(0, ans);
+
+    
 }
 
 int main(){
