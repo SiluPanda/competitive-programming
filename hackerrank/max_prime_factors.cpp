@@ -34,7 +34,7 @@ int main(){
                 ans++;
             }
             curr++;
-        }
+        }      
         cout << ans << endl;
     }
 }
