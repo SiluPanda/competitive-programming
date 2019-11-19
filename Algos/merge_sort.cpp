@@ -2,40 +2,38 @@
 using namespace std;
 #define ll long long int
 
-void merge(ll a[], ll low, ll mid, ll high){
-    ll c[high-low+1] = {0};
-    ll i = low, j = mid+1, k = 0;
-    while(i <= mid && j <= high){
-        if(a[i] < a[j]){
-            c[k++] = a[i++];
+void merge(int v[], int low, int mid, int high){
+    int dup[high-low+1];
+    memset(dup, 0, sizeof(dup));
+    int i = low, j = mid;
+    int k = low;
+    while(i < mid && j <= high){
+        if(v[i] < v[j]){
+            dup[k++] = v[i++];
         }
-        else c[k++] = a[j++];
+        else dup[k++] = v[j++];
     }
-    while(i <= mid) c[k++] = a[i++];
-    while(j <= high) c[k++] = a[j++];
-    for(ll i = low; i <= high; i++) a[i] = c[i-low];
-
+    while(i <= mid-1) dup[k++] = v[i++];
+    while(j <= high) dup[k++] = v[j++];
+    for(int i = 0; i < high-low+1; i++) v[i+low] = dup[i];
 }
 
-void merge_sort(ll a[], ll low, ll high){
+void mergesort(int v[], int low, int high){
     if(low < high){
-        ll mid = (low+high)/2;
-        merge_sort(a, low, mid);
-        merge_sort(a, mid+1, high);
-        merge(a, low, mid, high);
+        int mid = (low+high)/2;
+        mergesort(v, low, mid);
+        mergesort(v, mid+1, high);
+        merge(v, low, mid, high);
     }
 }
 
 int main(){
-    ll n;
+    int n;
     cin >> n;
-    ll a[n];
-    for(ll i = 0; i < n; i++){
-        cin >> a[i];
-    }
-    merge_sort(a, 0, n-1);
-    for(ll i = 0; i < n; i++){
-        cout << a[i] << " ";
-    }
+    int v[n];
+    for(int i = 0; i < n; i++) cin >> v[i];
+    mergesort(v, 0, n-1);
+    for(int i = 0; i < n; i++) cout << v[i] << " ";
     cout << endl;
+    
 }

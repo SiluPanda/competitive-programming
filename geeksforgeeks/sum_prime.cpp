@@ -5,30 +5,36 @@ using namespace std;
 #define fastio ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 #define el "\n"
 
-bool isprime(int n){
-    if(n == 1) return false;
-    if(n == 2 || n == 3) return true;
-    if(n%2 == 0 || n%3 == 0) return false;
-    for(int i = 5; i < sqrt(n)+1; i += 6){
-        if(n%i == 0 || n%(i+2) == 0) return false;
+bool prime[1000001];
+
+void precompute(){
+    memset(prime, 1, sizeof(prime));
+    prime[1] = 0;
+    for(int p = 2; p*p <= 1000000; p++){
+        if(prime[p]){
+            for(int i = p*p; i <= 1000000; i+=p){
+                prime[i] = 0;
+            }
+        }
     }
-    return true;
 }
 
 int main(){
+    precompute();
     fastio
-    int t; cin>>t;
-    while(t--){
+    int tt;
+    cin >> tt;
+    while(tt--){
         int n;
-        cin>>n;
-        for(int i = 2; i < n-3; i++){
-            if(isprime(i) && isprime(n-i)){
-                cout << i << " " << n-i << el;
+        cin >> n;
+        bool f = 0;
+        for(int i = 2; i <= (n/2); i++){
+            if(prime[i] && prime[n-i]){
+                cout << i << " " << n-i << endl;
+                f = 1;
                 break;
             }
         }
-
+        if(!f) cout << -1 << endl;
     }
-	
-	return 0;
 }
