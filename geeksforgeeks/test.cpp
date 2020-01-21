@@ -1,16 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void increase(int n){
-    n++;
-}
-
-int incr(int n){
-    increase(n);
-    return n;
-}
-
 int main(){
-    int n = 8;
-    cout << incr(n) << endl;
+    int i = _l_abc(10);
+    cout << --i << endl;
 }
+int _l_abc(int i){
+    return(i++);
+}
+
