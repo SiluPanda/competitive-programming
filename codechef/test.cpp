@@ -2,10 +2,7 @@
 using namespace std;
 
 int main(){
-    int n = 5;
-    int a[n];
-    memset(a, -1, sizeof(a));
-    for(int i = 0; i < n; i++){
-        cout << a[i] << endl;
-    }
+    string s = "hellothere";
+    s[3] = 'p';
+    cout << s << endl;
 }
